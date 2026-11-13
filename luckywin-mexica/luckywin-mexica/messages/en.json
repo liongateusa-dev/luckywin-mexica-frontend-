@@ -1,0 +1,103 @@
+{
+  "nav": {
+    "home": "Home",
+    "play": "Play",
+    "winners": "Winners",
+    "terms": "Terms",
+    "privacy": "Privacy",
+    "register": "Register"
+  },
+  "hero": {
+    "title": "LuckyWin Mexica",
+    "tagline": "Play free. Win big.",
+    "subtitle": "A 100% free promotional giveaway for Mexico. No purchase necessary.",
+    "cta": "Play now"
+  },
+  "trust": {
+    "free": "100% free",
+    "noPurchase": "No purchase necessary",
+    "secure": "Secure",
+    "monthly": "Monthly draw"
+  },
+  "prizes": {
+    "heading": "This cycle's prizes",
+    "subheading": "40 winners every month",
+    "cash": "Cash",
+    "cashDesc": "$5,000 USD each",
+    "cashWinners": "5 winners",
+    "iphone": "iPhone 17",
+    "iphoneWinners": "5 winners",
+    "ps5": "PlayStation 5",
+    "ps5Winners": "10 winners",
+    "laptop": "Laptop",
+    "laptopWinners": "10 winners",
+    "giftcard": "Amazon Gift Card",
+    "giftcardDesc": "$1,000 USD each",
+    "giftcardWinners": "10 winners",
+    "disclaimer": "Cash prizes are paid in Mexican pesos (MXN) at the prevailing exchange rate on the date of payout."
+  },
+  "howItWorks": {
+    "heading": "How it works",
+    "step1Title": "Register",
+    "step1Desc": "Fill in your details in under a minute.",
+    "step2Title": "Get your numbers",
+    "step2Desc": "We assign your lucky numbers instantly.",
+    "step3Title": "Join the monthly draw",
+    "step3Desc": "Each cycle has 40 prizes available.",
+    "step4Title": "Win",
+    "step4Desc": "If you win, we'll tell you how to claim your prize via WhatsApp."
+  },
+  "winnersSection": {
+    "heading": "This month's winners",
+    "empty": "This month's winners will appear here.",
+    "viewAll": "View all winners"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "noPurchaseNecessary": "No purchase is necessary to enter or win. Promotion valid only for Mexico residents 18 years or older. See the Terms and Conditions for full details on eligibility, odds, and prize fulfillment.",
+    "whatsappHelp": "Questions? Message us on WhatsApp."
+  },
+  "register": {
+    "heading": "Register to play",
+    "subheading": "It's free and takes less than a minute.",
+    "fullName": "Full name",
+    "email": "Email address",
+    "phone": "Phone number",
+    "ageConfirm": "I confirm I am 18 or older and reside in Mexico.",
+    "termsAgree": "I agree to the",
+    "termsLink": "Terms and Conditions",
+    "submit": "Register and play",
+    "errorRequired": "This field is required.",
+    "errorEmail": "Enter a valid email address.",
+    "errorAge": "You must confirm you are 18 or older.",
+    "errorTerms": "You must accept the Terms and Conditions."
+  },
+  "play": {
+    "heading": "Your lucky numbers!",
+    "revealing": "Generating your numbers...",
+    "entryLabel": "Your entry number",
+    "noticeTitle": "This is a free giveaway.",
+    "noticeBody": "No purchase necessary. Your entry is now registered in the monthly draw.",
+    "winTitle": "Congratulations, you won!",
+    "winBody": "You won: {prize}. Contact us on WhatsApp with your entry number to claim your prize.",
+    "contactWhatsapp": "Contact on WhatsApp",
+    "noWinTitle": "No win this time",
+    "noWinBody": "Your entry is still active in the monthly draw. You have one more attempt available.",
+    "retryButton": "Try again",
+    "noAttemptsTitle": "You've used your attempts",
+    "noAttemptsBody": "Thanks for playing. Watch our WhatsApp and social channels for the next cycle."
+  },
+  "winnersPage": {
+    "heading": "Winners",
+    "subheading": "This section will show real winners from each cycle.",
+    "tableName": "Winner",
+    "tablePrize": "Prize",
+    "tableDate": "Date",
+    "tbd": "To be announced",
+    "placeholderNote": "Real winners will be published here at the close of each monthly cycle."
+  },
+  "legal": {
+    "termsHeading": "Terms and Conditions",
+    "privacyHeading": "Privacy Policy"
+  }
+}

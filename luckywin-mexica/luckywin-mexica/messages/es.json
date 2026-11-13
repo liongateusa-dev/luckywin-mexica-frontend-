@@ -1,0 +1,103 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "play": "Jugar",
+    "winners": "Ganadores",
+    "terms": "Términos",
+    "privacy": "Privacidad",
+    "register": "Registrarse"
+  },
+  "hero": {
+    "title": "LuckyWin Mexica",
+    "tagline": "Juega gratis. Gana en grande.",
+    "subtitle": "Un sorteo promocional 100% gratuito para México. Sin compra necesaria.",
+    "cta": "Jugar ahora"
+  },
+  "trust": {
+    "free": "100% gratis",
+    "noPurchase": "Sin compra necesaria",
+    "secure": "Seguro",
+    "monthly": "Sorteo mensual"
+  },
+  "prizes": {
+    "heading": "Premios de este ciclo",
+    "subheading": "40 ganadores cada mes",
+    "cash": "Efectivo",
+    "cashDesc": "$5,000 USD c/u",
+    "cashWinners": "5 ganadores",
+    "iphone": "iPhone 17",
+    "iphoneWinners": "5 ganadores",
+    "ps5": "PlayStation 5",
+    "ps5Winners": "10 ganadores",
+    "laptop": "Laptop",
+    "laptopWinners": "10 ganadores",
+    "giftcard": "Tarjeta de regalo Amazon",
+    "giftcardDesc": "$1,000 USD c/u",
+    "giftcardWinners": "10 ganadores",
+    "disclaimer": "Los premios en efectivo se pagan en pesos mexicanos (MXN) al tipo de cambio vigente el día del pago."
+  },
+  "howItWorks": {
+    "heading": "Cómo funciona",
+    "step1Title": "Regístrate",
+    "step1Desc": "Completa tus datos en menos de un minuto.",
+    "step2Title": "Recibe tus números",
+    "step2Desc": "Te asignamos tus números de la suerte al instante.",
+    "step3Title": "Participa en el sorteo mensual",
+    "step3Desc": "Cada ciclo tiene 40 premios disponibles.",
+    "step4Title": "Gana",
+    "step4Desc": "Si ganas, te decimos cómo reclamar tu premio por WhatsApp."
+  },
+  "winnersSection": {
+    "heading": "Ganadores de este mes",
+    "empty": "Los ganadores de este mes aparecerán aquí.",
+    "viewAll": "Ver todos los ganadores"
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados.",
+    "noPurchaseNecessary": "No se requiere compra para participar ni para ganar. Promoción válida solo para residentes de México mayores de 18 años. Consulta los Términos y Condiciones para detalles completos sobre elegibilidad, probabilidades y el proceso de entrega de premios.",
+    "whatsappHelp": "¿Preguntas? Escríbenos por WhatsApp."
+  },
+  "register": {
+    "heading": "Regístrate para jugar",
+    "subheading": "Es gratis y toma menos de un minuto.",
+    "fullName": "Nombre completo",
+    "email": "Correo electrónico",
+    "phone": "Número de teléfono",
+    "ageConfirm": "Confirmo que tengo 18 años o más y resido en México.",
+    "termsAgree": "Acepto los",
+    "termsLink": "Términos y Condiciones",
+    "submit": "Registrarme y jugar",
+    "errorRequired": "Este campo es obligatorio.",
+    "errorEmail": "Ingresa un correo electrónico válido.",
+    "errorAge": "Debes confirmar que tienes 18 años o más.",
+    "errorTerms": "Debes aceptar los Términos y Condiciones."
+  },
+  "play": {
+    "heading": "¡Tus números de la suerte!",
+    "revealing": "Generando tus números...",
+    "entryLabel": "Tu número de entrada",
+    "noticeTitle": "Este es un sorteo gratuito.",
+    "noticeBody": "No se requiere compra. Tu entrada ya está registrada en el sorteo mensual.",
+    "winTitle": "¡Felicidades, ganaste!",
+    "winBody": "Ganaste: {prize}. Contáctanos por WhatsApp con tu número de entrada para reclamar tu premio.",
+    "contactWhatsapp": "Contactar por WhatsApp",
+    "noWinTitle": "No ganaste esta vez",
+    "noWinBody": "Tu entrada sigue participando en el sorteo mensual. Aún te queda un intento disponible.",
+    "retryButton": "Intentar de nuevo",
+    "noAttemptsTitle": "Ya usaste tus intentos",
+    "noAttemptsBody": "Gracias por participar. Sigue atento a nuestro WhatsApp y redes para el próximo ciclo."
+  },
+  "winnersPage": {
+    "heading": "Ganadores",
+    "subheading": "Esta sección mostrará a los ganadores reales de cada ciclo.",
+    "tableName": "Ganador",
+    "tablePrize": "Premio",
+    "tableDate": "Fecha",
+    "tbd": "Por anunciar",
+    "placeholderNote": "Los ganadores reales se publicarán aquí al cierre de cada ciclo mensual."
+  },
+  "legal": {
+    "termsHeading": "Términos y Condiciones",
+    "privacyHeading": "Política de Privacidad"
+  }
+}
