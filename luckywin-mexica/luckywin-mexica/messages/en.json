@@ -9,14 +9,14 @@
   },
   "hero": {
     "title": "LuckyWin Mexica",
-    "tagline": "Play free. Win big.",
-    "subtitle": "A 100% free promotional giveaway for Mexico. No purchase necessary.",
+    "tagline": "Mexico's official monthly prize draw.",
+    "subtitle": "A free, secure promotional draw open to everyone in Mexico. No purchase is required to enter or to win.",
     "cta": "Play now"
   },
   "trust": {
-    "free": "100% free",
+    "free": "100% free to enter",
     "noPurchase": "No purchase necessary",
-    "secure": "Secure",
+    "secure": "Secure & verified draws",
     "monthly": "Monthly draw"
   },
   "prizes": {
@@ -40,22 +40,24 @@
     "giftcard": "Amazon Gift Card",
     "giftcardDesc": "$1,000 USD each",
     "giftcardWinners": "10 winners",
-    "disclaimer": "Cash prizes are paid in Mexican pesos (MXN) at the prevailing exchange rate on the date of payout."
+    "disclaimer": "Prize availability updates in real time and reflects what remains in the current monthly cycle. No purchase is necessary to enter or win.",
+    "oneWinner": "1 winner",
+    "winnersCount": "{count} winners"
   },
   "howItWorks": {
     "heading": "How it works",
-    "step1Title": "Register",
-    "step1Desc": "Fill in your details in under a minute.",
-    "step2Title": "Get your numbers",
-    "step2Desc": "We assign your lucky numbers instantly.",
-    "step3Title": "Join the monthly draw",
-    "step3Desc": "Each cycle has 40 prizes available.",
-    "step4Title": "Win",
-    "step4Desc": "If you win, we'll tell you how to claim your prize via WhatsApp."
+    "step1Title": "Create your account",
+    "step1Desc": "Register in under a minute with your name, phone number, and email.",
+    "step2Title": "Play a game",
+    "step2Desc": "Choose the Lottery Card or the Slot Machine and play — you get 5 free attempts every cycle.",
+    "step3Title": "Win and reveal your prize",
+    "step3Desc": "If your attempt wins, scratch your card on screen to reveal exactly what you've won.",
+    "step4Title": "Claim it on WhatsApp",
+    "step4Desc": "Accept your prize, then contact our WhatsApp support team to arrange verification and delivery."
   },
   "winnersSection": {
     "heading": "This month's winners",
-    "empty": "This month's winners will appear here.",
+    "empty": "Winner photos will be posted here as prizes are claimed.",
     "viewAll": "View all winners"
   },
   "footer": {
@@ -130,7 +132,8 @@
     "scratchCard": {
       "instructions": "Scratch the card below to reveal your prize.",
       "scratchHere": "SCRATCH HERE",
-      "youWon": "You won"
+      "youWon": "You won",
+      "youWonMultiple": "You won these prizes"
     }
   },
   "awarded": {

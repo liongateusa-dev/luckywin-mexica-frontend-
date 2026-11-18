@@ -9,14 +9,14 @@
   },
   "hero": {
     "title": "LuckyWin Mexica",
-    "tagline": "Juega gratis. Gana en grande.",
-    "subtitle": "Un sorteo promocional 100% gratuito para México. Sin compra necesaria.",
+    "tagline": "El sorteo mensual oficial de México.",
+    "subtitle": "Un sorteo promocional gratuito y seguro, abierto a todos en México. No se requiere compra para participar ni para ganar.",
     "cta": "Jugar ahora"
   },
   "trust": {
-    "free": "100% gratis",
-    "noPurchase": "Sin compra necesaria",
-    "secure": "Seguro",
+    "free": "100% gratis para participar",
+    "noPurchase": "No se requiere compra",
+    "secure": "Sorteos seguros y verificados",
     "monthly": "Sorteo mensual"
   },
   "prizes": {
@@ -40,22 +40,24 @@
     "giftcard": "Tarjeta de regalo Amazon",
     "giftcardDesc": "$1,000 USD c/u",
     "giftcardWinners": "10 ganadores",
-    "disclaimer": "Los premios en efectivo se pagan en pesos mexicanos (MXN) al tipo de cambio vigente el día del pago."
+    "disclaimer": "La disponibilidad de premios se actualiza en tiempo real y refleja lo que queda en el ciclo mensual actual. No se requiere compra para participar ni para ganar.",
+    "oneWinner": "1 ganador",
+    "winnersCount": "{count} ganadores"
   },
   "howItWorks": {
     "heading": "Cómo funciona",
-    "step1Title": "Regístrate",
-    "step1Desc": "Completa tus datos en menos de un minuto.",
-    "step2Title": "Recibe tus números",
-    "step2Desc": "Te asignamos tus números de la suerte al instante.",
-    "step3Title": "Participa en el sorteo mensual",
-    "step3Desc": "Cada ciclo tiene 40 premios disponibles.",
-    "step4Title": "Gana",
-    "step4Desc": "Si ganas, te decimos cómo reclamar tu premio por WhatsApp."
+    "step1Title": "Crea tu cuenta",
+    "step1Desc": "Regístrate en menos de un minuto con tu nombre, número de teléfono y correo electrónico.",
+    "step2Title": "Juega una partida",
+    "step2Desc": "Elige la Carta de Lotería o la Máquina Tragamonedas y juega — tienes 5 intentos gratis en cada ciclo.",
+    "step3Title": "Gana y revela tu premio",
+    "step3Desc": "Si tu intento gana, raspa tu tarjeta en pantalla para revelar exactamente lo que ganaste.",
+    "step4Title": "Reclámalo por WhatsApp",
+    "step4Desc": "Acepta tu premio y luego contacta a nuestro equipo de soporte por WhatsApp para coordinar la verificación y la entrega."
   },
   "winnersSection": {
     "heading": "Ganadores de este mes",
-    "empty": "Los ganadores de este mes aparecerán aquí.",
+    "empty": "Las fotos de los ganadores se publicarán aquí a medida que se reclamen los premios.",
     "viewAll": "Ver todos los ganadores"
   },
   "footer": {
@@ -130,7 +132,8 @@
     "scratchCard": {
       "instructions": "Raspa la tarjeta de abajo para revelar tu premio.",
       "scratchHere": "RASPA AQUÍ",
-      "youWon": "Ganaste"
+      "youWon": "Ganaste",
+      "youWonMultiple": "Ganaste estos premios"
     }
   },
   "awarded": {
