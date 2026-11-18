@@ -1,0 +1,16 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="lidGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4a4a4e"/>
+      <stop offset="100%" stop-color="#1c1c1f"/>
+    </linearGradient>
+    <linearGradient id="lapScreenGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3bd0ff"/>
+      <stop offset="100%" stop-color="#2a6cff"/>
+    </linearGradient>
+  </defs>
+  <rect x="48" y="55" width="104" height="70" rx="6" fill="url(#lidGrad)" stroke="#070708" stroke-width="2"/>
+  <rect x="55" y="62" width="90" height="56" rx="3" fill="url(#lapScreenGrad)"/>
+  <path d="M32 132 L168 132 L178 150 Q180 156 173 156 L27 156 Q20 156 22 150 Z" fill="#2c2c2f" stroke="#070708" stroke-width="2"/>
+  <rect x="85" y="140" width="30" height="5" rx="2.5" fill="#56565a"/>
+</svg>

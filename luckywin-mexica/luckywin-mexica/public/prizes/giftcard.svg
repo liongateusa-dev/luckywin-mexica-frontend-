@@ -1,0 +1,17 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cardGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffb545"/>
+      <stop offset="100%" stop-color="#e8862a"/>
+    </linearGradient>
+  </defs>
+  <rect x="25" y="60" width="150" height="90" rx="12" fill="url(#cardGrad)" stroke="#a3611a" stroke-width="2" transform="rotate(-6 100 105)"/>
+  <rect x="25" y="60" width="150" height="26" rx="4" fill="#1c1c1f" opacity="0.85" transform="rotate(-6 100 105)"/>
+  <g transform="rotate(-6 100 105)">
+    <circle cx="150" cy="130" r="16" fill="#ffffff" opacity="0.9"/>
+    <path d="M142 130 q8 10 16 0" stroke="#e8862a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <circle cx="146" cy="124" r="2.4" fill="#e8862a"/>
+    <circle cx="154" cy="124" r="2.4" fill="#e8862a"/>
+  </g>
+  <text x="60" y="130" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1c1c1f" transform="rotate(-6 100 105)">GIFT</text>
+</svg>
