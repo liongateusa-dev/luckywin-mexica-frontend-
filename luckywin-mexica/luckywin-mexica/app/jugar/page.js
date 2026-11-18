@@ -10,6 +10,7 @@ import { getWhatsAppLink } from "../../lib/config";
 import LotteryCard from "../../components/LotteryCard";
 import SlotMachine from "../../components/SlotMachine";
 import ScratchCard from "../../components/ScratchCard";
+import { usePrizeData } from "../../lib/usePrizeData";
 
 // This page calls the REAL backend — no client-side win/lose logic lives
 // here. The server already decided `result.outcome` (and, if a win, which
@@ -20,6 +21,19 @@ export default function PlayPage() {
   const { t } = useLanguage();
   const { user, loading, getAccessToken } = useAuth();
   const router = useRouter();
+  const { data: cycle } = usePrizeData();
+
+  // Builds a prize label with the live MXN value appended for cash
+  // tiers (e.g. "Cash $5,000 USD (≈ $92,500 MXN)"), falling back to the
+  // plain translated label if live cycle data hasn't loaded yet.
+  function prizeLabelFor(prizeTierKey) {
+    const base = t(`prizes.${prizeTierKey}`);
+    const tierData = cycle?.prizeTiers?.find((pt) => pt.key === prizeTierKey);
+    if (tierData?.cashValueMxn != null) {
+      return `${base} (≈ $${tierData.cashValueMxn.toLocaleString("es-MX")} MXN)`;
+    }
+    return base;
+  }
 
   // loading | needs-profile | choose-game | playing | revealed-pending-scratch | scratched | no-attempts | error
   const [stage, setStage] = useState("loading");
@@ -93,9 +107,9 @@ export default function PlayPage() {
 
   const whatsappMsg = useMemo(() => {
     if (result?.outcome !== "won" || !cycleEntry) return "";
-    const prizeLabel = t(`prizes.${result.prizeTierKey}`);
+    const prizeLabel = prizeLabelFor(result.prizeTierKey);
     return `Hola, gané ${prizeLabel} en LuckyWin Mexica. Mi número de entrada es ${cycleEntry.entryNumber}.`;
-  }, [result, cycleEntry, t]);
+  }, [result, cycleEntry, t, cycle]);
 
   if (loading || stage === "loading") {
     return (
@@ -175,7 +189,7 @@ export default function PlayPage() {
         <div className="space-y-6">
           <h2 className="text-2xl font-bold text-mxgreen">{t("play.winTitle")}</h2>
           <ScratchCard
-            prizeLabel={t(`prizes.${result.prizeTierKey}`)}
+            prizeLabel={prizeLabelFor(result.prizeTierKey)}
             onFullyRevealed={() => setStage("scratched")}
           />
         </div>
@@ -187,7 +201,7 @@ export default function PlayPage() {
             {t("play.winTitle")}
           </h2>
           <p className="text-neutral-200">
-            {t("play.winBody", { prize: t(`prizes.${result.prizeTierKey}`) })}
+            {t("play.winBody", { prize: prizeLabelFor(result.prizeTierKey) })}
           </p>
           <div className="rounded-xl border border-white/10 bg-neutral-900/40 p-4 text-sm text-neutral-400 text-left">
             <p className="font-semibold text-neutral-200 mb-1">{t("play.noticeTitle")}</p>
