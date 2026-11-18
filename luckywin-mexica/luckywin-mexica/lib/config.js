@@ -17,13 +17,13 @@ export function getWhatsAppLink(message) {
 // Prize tiers for the current cycle. Keys match the translation dictionaries
 // in /messages/es.json and /messages/en.json (prizes.<key>, prizes.<key>Winners).
 export const PRIZE_TIERS = [
-  { key: "cash5k", winners: 1, image: "/prizes/cash.svg" },
-  { key: "cash10k", winners: 1, image: "/prizes/cash.svg" },
-  { key: "cash15k", winners: 1, image: "/prizes/cash.svg" },
-  { key: "iphone", winners: 5, image: "/prizes/iphone.svg" },
-  { key: "ps5", winners: 10, image: "/prizes/ps5.svg" },
-  { key: "laptop", winners: 10, image: "/prizes/laptop.svg" },
-  { key: "giftcard", winners: 10, image: "/prizes/giftcard.svg" },
+  { key: "cash5k", winners: 1, image: "/prizes/cash.jpg" },
+  { key: "cash10k", winners: 1, image: "/prizes/cash.jpg" },
+  { key: "cash15k", winners: 1, image: "/prizes/cash.jpg" },
+  { key: "iphone", winners: 5, image: "/prizes/iphone.jpg" },
+  { key: "ps5", winners: 10, image: "/prizes/ps5.jpg" },
+  { key: "laptop", winners: 10, image: "/prizes/laptop.jpg" },
+  { key: "giftcard", winners: 10, image: "/prizes/giftcard.jpg" },
 ];
 
 export const TOTAL_WINNERS_PER_CYCLE = PRIZE_TIERS.reduce(
