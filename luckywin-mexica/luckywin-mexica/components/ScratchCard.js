@@ -3,17 +3,25 @@
 import { useRef, useEffect, useState, useCallback } from "react";
 import { useLanguage } from "../lib/LanguageContext";
 
-// Scratch Card reveal: shown after a WIN from either mini-game. The
-// prize underneath is whatever prizeTierKey the server already drew
-// (randomly, weighted by remaining inventory, across every prize tier —
-// cash or physical) — this component only lets the player "scratch" to
-// reveal it. Nothing here decides the prize; it is purely the reveal
-// animation for a result the backend returned in /jugar page.js.
-export default function ScratchCard({ prizeLabel, onFullyRevealed }) {
+// Scratch Card reveal: shown after a WIN from either mini-game, or after
+// an admin-issued AwardedLink claim. The prize(s) underneath are
+// whatever the server already decided (prizeTierKey(s) drawn in
+// drawService.js, or the 3 fixed prizes from awardedLinkService.js) —
+// this component only lets the player "scratch" to reveal them. Nothing
+// here decides the prize; it is purely the reveal animation.
+//
+// Accepts EITHER a single `prizeLabel` string (used by the regular
+// /jugar game flow, which reveals one prize) OR a `prizeLabels` array
+// (used by the admin-awarded-link flow, which always reveals 3 prizes
+// together per spec). Exactly one of the two should be passed.
+export default function ScratchCard({ prizeLabel, prizeLabels, onFullyRevealed }) {
   const { t } = useLanguage();
   const canvasRef = useRef(null);
   const [cleared, setCleared] = useState(false);
   const isDrawing = useRef(false);
+
+  const labels = prizeLabels && prizeLabels.length > 0 ? prizeLabels : prizeLabel ? [prizeLabel] : [];
+  const isMultiple = labels.length > 1;
 
   const drawOverlay = useCallback((canvas) => {
     const ctx = canvas.getContext("2d");
@@ -34,7 +42,7 @@ export default function ScratchCard({ prizeLabel, onFullyRevealed }) {
     canvas.width = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
     drawOverlay(canvas);
-  }, [drawOverlay]);
+  }, [drawOverlay, isMultiple]);
 
   function getPos(e, canvas) {
     const rect = canvas.getBoundingClientRect();
@@ -70,12 +78,26 @@ export default function ScratchCard({ prizeLabel, onFullyRevealed }) {
   return (
     <div className="space-y-4 text-center">
       <p className="text-sm text-neutral-400">{t("games.scratchCard.instructions")}</p>
-      <div className="relative w-64 h-40 mx-auto rounded-xl overflow-hidden border-2 border-gold/50 bg-neutral-900">
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-1 px-4">
+      <div
+        className={`relative w-72 mx-auto rounded-xl overflow-hidden border-2 border-gold/50 bg-neutral-900 ${
+          isMultiple ? "h-56" : "h-40"
+        }`}
+      >
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 px-4">
           <span className="text-xs text-neutral-400 uppercase tracking-wide">
-            {t("games.scratchCard.youWon")}
+            {isMultiple ? t("games.scratchCard.youWonMultiple") : t("games.scratchCard.youWon")}
           </span>
-          <span className="text-xl font-extrabold text-gold text-center">{prizeLabel}</span>
+          {isMultiple ? (
+            <ul className="space-y-1">
+              {labels.map((label, i) => (
+                <li key={i} className="text-lg font-extrabold text-gold text-center">
+                  {label}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <span className="text-xl font-extrabold text-gold text-center">{labels[0]}</span>
+          )}
         </div>
         {!cleared && (
           <canvas
