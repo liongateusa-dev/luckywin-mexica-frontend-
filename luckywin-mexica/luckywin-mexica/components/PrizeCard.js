@@ -11,14 +11,14 @@ export default function PrizeCard({ tierKey, winners, image }) {
 
   return (
     <div className="rounded-2xl border border-white/10 bg-neutral-900/70 p-5 flex flex-col items-start gap-3 hover:border-gold/50 transition">
-      <div className="w-20 h-20 rounded-xl bg-gold/10 flex items-center justify-center overflow-hidden">
+      <div className="relative w-full aspect-[4/3] rounded-xl bg-white overflow-hidden">
         {image && (
           <Image
             src={image}
             alt={t(`prizes.${tierKey}`)}
-            width={80}
-            height={80}
-            className="object-contain w-full h-full"
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            className="object-cover"
           />
         )}
       </div>
