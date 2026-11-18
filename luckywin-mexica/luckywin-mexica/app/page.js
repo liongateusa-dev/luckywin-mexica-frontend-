@@ -17,7 +17,11 @@ export default function HomePage() {
     <div>
       {/* HERO */}
       <section className="relative overflow-hidden bg-grid">
-        <div className="absolute inset-0 bg-gradient-to-b from-mxgreen/10 via-transparent to-neutral-950 pointer-events-none" />
+        <div
+          className="absolute inset-0 bg-cover bg-top sm:bg-center opacity-30 sm:opacity-40"
+          style={{ backgroundImage: "url('/hero/hero-charro.jpg')" }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/40 via-neutral-950/70 to-neutral-950 pointer-events-none" />
         <div className="relative max-w-5xl mx-auto px-4 sm:px-6 pt-16 pb-20 text-center">
           <div className="inline-flex items-center gap-1 text-xs font-semibold tracking-wide uppercase text-gold/90 border border-gold/30 rounded-full px-3 py-1 mb-6">
             🇲🇽 {t("trust.monthly")} · {TOTAL_WINNERS_PER_CYCLE} {t("prizes.subheading").split(" ").slice(1).join(" ")}
@@ -61,7 +65,7 @@ export default function HomePage() {
         </div>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           {PRIZE_TIERS.map((tier) => (
-            <PrizeCard key={tier.key} tierKey={tier.key} winners={tier.winners} />
+            <PrizeCard key={tier.key} tierKey={tier.key} winners={tier.winners} image={tier.image} />
           ))}
         </div>
         <p className="text-xs text-neutral-500 mt-6 text-center max-w-2xl mx-auto">
