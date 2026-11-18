@@ -1,8 +1,17 @@
 // ---------------------------------------------------------------------------
 // LuckyWin Mexica — site configuration
-// Edit the values below to update prize counts, WhatsApp number, etc.
+// Edit the values below to update WhatsApp number, cycle label, etc.
 // This is the ONLY file that should need editing for basic content changes.
 // ---------------------------------------------------------------------------
+// Prize counts, winner totals, and cash USD/MXN values are NO LONGER
+// configured here — they come live from the backend database via
+// GET /api/cycle/current (see lib/usePrizeData.js), which is what keeps
+// every number on the site in sync with the admin dashboard's
+// PrizeTier.totalPerCycle values instead of drifting out of sync with a
+// hardcoded frontend constant (the earlier 38-vs-42 mismatch bug).
+//
+// This file now only holds things that are genuinely static config, not
+// live data.
 
 // Replace with the real WhatsApp number in international format, no spaces,
 // no leading "+". Example: "5215512345678" for a Mexico mobile number.
@@ -13,23 +22,6 @@ export function getWhatsAppLink(message) {
   if (!message) return base;
   return `${base}?text=${encodeURIComponent(message)}`;
 }
-
-// Prize tiers for the current cycle. Keys match the translation dictionaries
-// in /messages/es.json and /messages/en.json (prizes.<key>, prizes.<key>Winners).
-export const PRIZE_TIERS = [
-  { key: "cash5k", winners: 1, image: "/prizes/cash.jpg" },
-  { key: "cash10k", winners: 1, image: "/prizes/cash.jpg" },
-  { key: "cash15k", winners: 1, image: "/prizes/cash.jpg" },
-  { key: "iphone", winners: 5, image: "/prizes/iphone.jpg" },
-  { key: "ps5", winners: 10, image: "/prizes/ps5.jpg" },
-  { key: "laptop", winners: 10, image: "/prizes/laptop.jpg" },
-  { key: "giftcard", winners: 10, image: "/prizes/giftcard.jpg" },
-];
-
-export const TOTAL_WINNERS_PER_CYCLE = PRIZE_TIERS.reduce(
-  (sum, tier) => sum + tier.winners,
-  0
-); // 40
 
 export const CYCLE_LENGTH_LABEL = "monthly"; // informational only in this phase
 
