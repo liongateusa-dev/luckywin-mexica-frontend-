@@ -9,24 +9,25 @@ import ScratchCard from "../../../components/ScratchCard";
 
 // Reveal page for an admin-issued AwardedLink (see awardedLinkService.js
 // on the backend). This is for REAL winners of a qualifying round run
-// outside this website — the admin picked only the prize tier when
-// issuing the link; nothing is created or revealed until the real
-// recipient types their own name below. No login/signup required.
+// outside this website. Per spec, every link always awards exactly 3
+// prizes together (1 random cash tier + laptop + iPhone 17 Pro) —
+// nothing is created or revealed until the real recipient types their
+// own name below. No login/signup required.
 //
-// Flow: check token -> ask for name -> claim (creates the real Winner
-// row server-side) -> congratulate by name -> scratch card reveal ->
-// Accept -> guided to WhatsApp.
+// Flow: check token -> ask for name -> claim (creates 3 real Winner
+// rows server-side) -> congratulate by name -> single scratch card
+// reveals all 3 prizes together -> Accept -> guided to WhatsApp.
 export default function AwardedLinkPage() {
   const { t } = useLanguage();
   const { token } = useParams();
 
-  // checking | invalid | enter-name | revealing | scratch | accepted
+  // checking | invalid | enter-name | scratch | accept-pending | accepted
   const [stage, setStage] = useState("checking");
   const [invalidReason, setInvalidReason] = useState("");
   const [fullName, setFullName] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-  const [claim, setClaim] = useState(null); // { winnerId, fullName, prizeTierKey, prizeTierLabel, claimDeadline }
+  const [claim, setClaim] = useState(null); // { fullName, claimDeadline, prizes: [{winnerId, prizeTierKey, prizeTierLabel}, ...] }
 
   useEffect(() => {
     if (!token) return;
@@ -79,11 +80,14 @@ export default function AwardedLinkPage() {
   async function handleAccept() {
     if (!claim) return;
     try {
-      await apiFetch(`/awarded/winners/${claim.winnerId}/accept`);
+      await apiFetch(`/awarded/accept`, {
+        method: "POST",
+        body: { winnerIds: claim.prizes.map((p) => p.winnerId) },
+      });
     } catch (err) {
       // Non-fatal — still let them continue to WhatsApp even if this
       // status update fails, so a transient error never blocks a real
-      // winner from claiming their prize.
+      // winner from claiming their prizes.
       console.error(err);
     }
     setStage("accepted");
@@ -91,7 +95,8 @@ export default function AwardedLinkPage() {
 
   const whatsappMsg = useMemo(() => {
     if (!claim) return "";
-    return `Hola, gané ${claim.prizeTierLabel} en LuckyWin Mexica. Mi nombre es ${claim.fullName}.`;
+    const prizeList = claim.prizes.map((p) => p.prizeTierLabel).join(", ");
+    return `Hola, gané ${prizeList} en LuckyWin Mexica. Mi nombre es ${claim.fullName}.`;
   }, [claim]);
 
   const claimDeadlineLabel = useMemo(() => {
@@ -154,7 +159,7 @@ export default function AwardedLinkPage() {
           </h1>
           <p className="text-neutral-400">{t("awarded.scratchHint")}</p>
           <ScratchCard
-            prizeLabel={claim.prizeTierLabel}
+            prizeLabels={claim.prizes.map((p) => p.prizeTierLabel)}
             onFullyRevealed={() => setStage("accept-pending")}
           />
         </div>
@@ -166,7 +171,13 @@ export default function AwardedLinkPage() {
             <p className="text-xs uppercase tracking-wide text-neutral-400">
               {t("awarded.prizeLabel")}
             </p>
-            <p className="text-2xl font-extrabold text-gold">{claim.prizeTierLabel}</p>
+            <ul className="space-y-1">
+              {claim.prizes.map((p) => (
+                <li key={p.winnerId} className="text-xl font-extrabold text-gold">
+                  {p.prizeTierLabel}
+                </li>
+              ))}
+            </ul>
             <p className="text-sm text-neutral-400">
               {t("awarded.claimByLabel", { date: claimDeadlineLabel })}
             </p>
