@@ -4,14 +4,23 @@ import Link from "next/link";
 import { useLanguage } from "../lib/LanguageContext";
 import { useAuth } from "../lib/AuthContext";
 import PrizeCard from "../components/PrizeCard";
-import { PRIZE_TIERS, TOTAL_WINNERS_PER_CYCLE } from "../lib/config";
+import { usePrizeData, useWinnerSpotlights } from "../lib/usePrizeData";
 
+// Winner counts and prize details shown ANYWHERE on this page come
+// exclusively from usePrizeData() (GET /api/cycle/current) — this is
+// what fixes the earlier 38-vs-42 mismatch, where the hero banner and
+// the prize section each computed their own number from a different,
+// hardcoded source. There is now exactly one number, read once, reused
+// everywhere below.
 export default function HomePage() {
   const { t } = useLanguage();
   const { user } = useAuth();
   const ctaHref = user ? "/jugar" : "/registro";
+  const { data: cycle, loading: cycleLoading } = usePrizeData();
+  const { spotlights } = useWinnerSpotlights();
 
   const steps = [1, 2, 3, 4];
+  const totalWinners = cycle?.totalWinnersThisCycle;
 
   return (
     <div>
@@ -24,7 +33,10 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/40 via-neutral-950/70 to-neutral-950 pointer-events-none" />
         <div className="relative max-w-5xl mx-auto px-4 sm:px-6 pt-16 pb-20 text-center">
           <div className="inline-flex items-center gap-1 text-xs font-semibold tracking-wide uppercase text-gold/90 border border-gold/30 rounded-full px-3 py-1 mb-6">
-            🇲🇽 {t("trust.monthly")} · {TOTAL_WINNERS_PER_CYCLE} {t("prizes.subheading").split(" ").slice(1).join(" ")}
+            🇲🇽 {t("trust.monthly")}
+            {!cycleLoading && totalWinners != null && (
+              <> · {totalWinners} {totalWinners === 1 ? t("prizes.oneWinner") : t("prizes.winnersCount", { count: totalWinners })}</>
+            )}
           </div>
           <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight mb-4">
             <span className="text-white">Lucky</span>
@@ -61,13 +73,25 @@ export default function HomePage() {
       <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16">
         <div className="text-center mb-10">
           <h2 className="text-3xl font-bold mb-2">{t("prizes.heading")}</h2>
-          <p className="text-neutral-400">{t("prizes.subheading")}</p>
+          <p className="text-neutral-400">
+            {!cycleLoading && totalWinners != null
+              ? (totalWinners === 1 ? t("prizes.oneWinner") : t("prizes.winnersCount", { count: totalWinners })) +
+                " " + t("trust.monthly").toLowerCase()
+              : t("trust.monthly")}
+          </p>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-          {PRIZE_TIERS.map((tier) => (
-            <PrizeCard key={tier.key} tierKey={tier.key} winners={tier.winners} image={tier.image} />
-          ))}
-        </div>
+        {cycleLoading && (
+          <div className="flex justify-center py-12">
+            <div className="w-10 h-10 rounded-full border-4 border-gold/30 border-t-gold animate-spin" />
+          </div>
+        )}
+        {!cycleLoading && cycle?.prizeTiers && (
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            {cycle.prizeTiers.map((tier) => (
+              <PrizeCard key={tier.key} tier={tier} />
+            ))}
+          </div>
+        )}
         <p className="text-xs text-neutral-500 mt-6 text-center max-w-2xl mx-auto">
           {t("prizes.disclaimer")}
         </p>
@@ -98,17 +122,31 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* WINNERS EMPTY STATE */}
+      {/* WINNERS — side-scrolling photo gallery, admin-uploaded */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-3xl font-bold">{t("winnersSection.heading")}</h2>
-          <Link href="/ganadores" className="text-sm font-semibold text-gold hover:underline">
+          <Link href="/ganadores" className="text-sm font-semibold text-gold hover:underline whitespace-nowrap">
             {t("winnersSection.viewAll")} →
           </Link>
         </div>
-        <div className="rounded-2xl border border-dashed border-white/15 bg-neutral-900/40 p-12 text-center text-neutral-500">
-          {t("winnersSection.empty")}
-        </div>
+        {spotlights.length > 0 ? (
+          <div className="flex gap-4 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 snap-x snap-mandatory">
+            {spotlights.map((s) => (
+              <div
+                key={s.id}
+                className="flex-none w-48 sm:w-56 aspect-square rounded-2xl overflow-hidden border border-white/10 snap-start"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={s.imageUrl} alt="" className="w-full h-full object-cover" />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="rounded-2xl border border-dashed border-white/15 bg-neutral-900/40 p-12 text-center text-neutral-500">
+            {t("winnersSection.empty")}
+          </div>
+        )}
       </section>
     </div>
   );
