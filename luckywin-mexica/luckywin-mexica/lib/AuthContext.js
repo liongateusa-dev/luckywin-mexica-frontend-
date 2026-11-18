@@ -34,7 +34,13 @@ export function AuthProvider({ children }) {
 
   const signUp = useCallback(async (email, password) => {
     const supabase = getSupabaseClient();
-    return supabase.auth.signUp({ email, password });
+    return supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        emailRedirectTo: `${window.location.origin}/iniciar-sesion`,
+      },
+    });
   }, []);
 
   const signIn = useCallback(async (email, password) => {
