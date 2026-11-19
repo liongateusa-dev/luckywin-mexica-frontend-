@@ -5,13 +5,13 @@ import { useLanguage } from "../lib/LanguageContext";
 
 const CASH_TIERS = ["cash5k", "cash10k", "cash15k"];
 const PRIZE_IMAGES = {
-  cash5k: "/prizes/cash.svg",
-  cash10k: "/prizes/cash.svg",
-  cash15k: "/prizes/cash.svg",
-  iphone: "/prizes/iphone.svg",
-  ps5: "/prizes/ps5.svg",
-  laptop: "/prizes/laptop.svg",
-  giftcard: "/prizes/giftcard.svg",
+  cash5k: "/prizes/cash.jpg",
+  cash10k: "/prizes/cash.jpg",
+  cash15k: "/prizes/cash.jpg",
+  iphone: "/prizes/iphone.jpg",
+  ps5: "/prizes/ps5.jpg",
+  laptop: "/prizes/laptop.jpg",
+  giftcard: "/prizes/giftcard.jpg",
 };
 
 // tier is one entry from the live GET /api/cycle/current response:
