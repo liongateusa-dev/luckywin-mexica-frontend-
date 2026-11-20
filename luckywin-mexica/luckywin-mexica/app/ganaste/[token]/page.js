@@ -6,6 +6,7 @@ import { useLanguage } from "../../../lib/LanguageContext";
 import { apiFetch } from "../../../lib/api";
 import { getWhatsAppLink } from "../../../lib/config";
 import ScratchCard from "../../../components/ScratchCard";
+import Confetti from "../../../components/Confetti";
 
 // Reveal page for an admin-issued AwardedLink (see awardedLinkService.js
 // on the backend). This is for REAL winners of a qualifying round run
@@ -28,6 +29,7 @@ export default function AwardedLinkPage() {
   const [submitting, setSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [claim, setClaim] = useState(null); // { fullName, claimDeadline, prizes: [{winnerId, prizeTierKey, prizeTierLabel}, ...] }
+  const [confettiBurst, setConfettiBurst] = useState(0); // bump this number to fire a new confetti burst
 
   useEffect(() => {
     if (!token) return;
@@ -40,6 +42,7 @@ export default function AwardedLinkPage() {
       const data = await apiFetch(`/awarded/${token}`);
       if (data.valid) {
         setStage("enter-name");
+        setConfettiBurst((n) => n + 1);
       } else {
         setInvalidReason(data.reason || "not_found");
         setStage("invalid");
@@ -127,6 +130,8 @@ export default function AwardedLinkPage() {
 
   return (
     <div className="max-w-md mx-auto px-4 sm:px-6 py-16">
+      {confettiBurst > 0 && <Confetti trigger={confettiBurst} />}
+
       {stage === "enter-name" && (
         <div className="text-center space-y-6">
           <h1 className="text-2xl font-bold">{t("awarded.heading")}</h1>
@@ -160,13 +165,19 @@ export default function AwardedLinkPage() {
           <p className="text-neutral-400">{t("awarded.scratchHint")}</p>
           <ScratchCard
             prizeLabels={claim.prizes.map((p) => p.prizeTierLabel)}
-            onFullyRevealed={() => setStage("accept-pending")}
+            onFullyRevealed={() => {
+              setStage("accept-pending");
+              setConfettiBurst((n) => n + 1);
+            }}
           />
         </div>
       )}
 
       {stage === "accept-pending" && claim && (
         <div className="text-center space-y-6">
+          <h1 className="text-2xl font-bold text-gold">
+            🎉 {t("awarded.congratsName", { name: claim.fullName })} 🎉
+          </h1>
           <div className="rounded-2xl border border-gold/40 bg-neutral-900/70 p-6 space-y-3">
             <p className="text-xs uppercase tracking-wide text-neutral-400">
               {t("awarded.prizeLabel")}
