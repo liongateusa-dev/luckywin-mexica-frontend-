@@ -23,9 +23,6 @@ export default function Footer() {
             <Link href="/privacidad" className="hover:text-white transition">
               {t("nav.privacy")}
             </Link>
-            <Link href="/ganadores" className="hover:text-white transition">
-              {t("nav.winners")}
-            </Link>
           </div>
         </div>
 
