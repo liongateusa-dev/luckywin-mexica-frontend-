@@ -28,9 +28,12 @@ function PrivacyEs() {
   return (
     <div>
       <p className="text-neutral-400 text-sm mb-8">
-        Última actualización: [FECHA]. Esta Política de Privacidad describe
-        cómo LuckyWin Mexica ("nosotros") recopila, usa y protege tu
-        información personal.
+        Última actualización: 20 de noviembre de 2026. Esta Política de
+        Privacidad describe cómo LuckyWin Mexica ("nosotros", "el
+        Operador") recopila, usa, protege y conserva tu información
+        personal al participar en la promoción "LuckyWin Mexica". Al
+        utilizar nuestro sitio o registrarte en la promoción, aceptas las
+        prácticas descritas en esta Política.
       </p>
 
       <Section title="1. Datos que recopilamos">
@@ -89,9 +92,12 @@ function PrivacyEn() {
   return (
     <div>
       <p className="text-neutral-400 text-sm mb-8">
-        Last updated: [DATE]. This Privacy Policy describes how LuckyWin
-        Mexica ("we") collects, uses, and protects your personal
-        information.
+        Last updated: November 20, 2026. This Privacy Policy describes how
+        LuckyWin Mexica ("we", "the Operator") collects, uses, protects,
+        and retains your personal information when you participate in the
+        "LuckyWin Mexica" promotion. By using our site or registering for
+        the promotion, you agree to the practices described in this
+        Policy.
       </p>
 
       <Section title="1. Data we collect">
