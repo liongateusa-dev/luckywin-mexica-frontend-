@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useLanguage } from "../lib/LanguageContext";
 
 export default function Footer() {
@@ -11,11 +12,13 @@ export default function Footer() {
     <footer className="border-t border-white/10 bg-neutral-950 mt-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-          <span className="text-lg font-bold">
-            <span className="text-white">Lucky</span>
-            <span className="text-gradient-gold">Win</span>{" "}
-            <span className="text-mxgreen">Mexica</span>
-          </span>
+          <Image
+            src="/logo.png"
+            alt="LuckyWin Mexica"
+            width={160}
+            height={64}
+            className="h-8 w-auto"
+          />
           <div className="flex gap-5 text-sm text-neutral-400">
             <Link href="/terminos" className="hover:text-white transition">
               {t("nav.terms")}

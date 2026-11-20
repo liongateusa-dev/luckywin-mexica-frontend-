@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { useLanguage } from "../lib/LanguageContext";
 import { useAuth } from "../lib/AuthContext";
@@ -59,12 +60,14 @@ export default function Header() {
           )}
 
           <Link href="/" className="flex items-center gap-2 shrink-0 min-w-0">
-            <span className="text-xl sm:text-2xl font-extrabold tracking-tight truncate">
-              <span className="text-white">Lucky</span>
-              <span className="text-gradient-gold">Win</span>{" "}
-              <span className="text-mxgreen">M</span>
-              <span className="text-white">exica</span>
-            </span>
+            <Image
+              src="/logo.png"
+              alt="LuckyWin Mexica"
+              width={184}
+              height={74}
+              priority
+              className="h-9 sm:h-11 w-auto"
+            />
           </Link>
         </div>
 
