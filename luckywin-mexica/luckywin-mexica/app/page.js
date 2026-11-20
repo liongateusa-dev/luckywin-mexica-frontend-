@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useLanguage } from "../lib/LanguageContext";
 import { useAuth } from "../lib/AuthContext";
 import PrizeCard from "../components/PrizeCard";
@@ -38,10 +39,15 @@ export default function HomePage() {
               <> · {totalWinners} {totalWinners === 1 ? t("prizes.oneWinner") : t("prizes.winnersCount", { count: totalWinners })}</>
             )}
           </div>
-          <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight mb-4">
-            <span className="text-white">Lucky</span>
-            <span className="text-gradient-gold">Win</span>{" "}
-            <span className="text-mxgreen">Mexica</span>
+          <h1 className="mb-4 flex justify-center">
+            <Image
+              src="/logo.png"
+              alt="LuckyWin Mexica"
+              width={552}
+              height={222}
+              priority
+              className="w-64 sm:w-96 h-auto"
+            />
           </h1>
           <p className="text-xl sm:text-2xl font-semibold text-neutral-200 mb-3">
             {t("hero.tagline")}
