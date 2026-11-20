@@ -3,7 +3,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useLanguage } from "../lib/LanguageContext";
-import { useAuth } from "../lib/AuthContext";
 import PrizeCard from "../components/PrizeCard";
 import { usePrizeData, useWinnerSpotlights } from "../lib/usePrizeData";
 
@@ -15,8 +14,11 @@ import { usePrizeData, useWinnerSpotlights } from "../lib/usePrizeData";
 // everywhere below.
 export default function HomePage() {
   const { t } = useLanguage();
-  const { user } = useAuth();
-  const ctaHref = user ? "/jugar" : "/registro";
+  // Always send players straight into the game. /jugar itself already
+  // redirects to /registro if they're not logged in yet (see
+  // app/jugar/page.js), so there's no need to gate that decision here —
+  // this just stops forcing registration before they even see the game.
+  const ctaHref = "/jugar";
   const { data: cycle, loading: cycleLoading } = usePrizeData();
   const { spotlights } = useWinnerSpotlights();
 
