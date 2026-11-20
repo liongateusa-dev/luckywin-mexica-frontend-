@@ -1,10 +1,7 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { useState, useMemo } from "react";
 import { useLanguage } from "../../lib/LanguageContext";
-import { useAuth } from "../../lib/AuthContext";
 import { apiFetch } from "../../lib/api";
 import { getWhatsAppLink } from "../../lib/config";
 import LotteryCard from "../../components/LotteryCard";
@@ -17,10 +14,14 @@ import { usePrizeData } from "../../lib/usePrizeData";
 // prize) before this page renders a single card or reel; LotteryCard /
 // SlotMachine / ScratchCard only animate toward that already-decided
 // outcome. See drawService.js on the backend for the actual odds.
+//
+// Play is fully anonymous (per product decision): no signup/login/
+// profile step. The player is identified only by an opaque id generated
+// client-side (lib/anonId.js) and sent as x-anon-id on every request —
+// apiFetch attaches it automatically, so nothing here needs an access
+// token at all.
 export default function PlayPage() {
   const { t } = useLanguage();
-  const { user, loading, getAccessToken } = useAuth();
-  const router = useRouter();
   const { data: cycle } = usePrizeData();
 
   // Builds a prize label with the live MXN value appended for cash
@@ -35,40 +36,27 @@ export default function PlayPage() {
     return base;
   }
 
-  // loading | needs-profile | choose-game | playing | revealed-pending-scratch | scratched | no-attempts | error
-  const [stage, setStage] = useState("loading");
+  // choose-game | playing | revealed-pending-scratch | scratched | no-attempts | error
+  const [stage, setStage] = useState("choose-game");
   const [gameType, setGameType] = useState(null); // "LOTTERY_CARD" | "SLOT_MACHINE"
   const [cycleEntry, setCycleEntry] = useState(null);
   const [result, setResult] = useState(null);
   const [errorMsg, setErrorMsg] = useState("");
   const [hasEntered, setHasEntered] = useState(false);
 
-  useEffect(() => {
-    if (loading) return;
-    if (!user) {
-      router.push("/registro");
-      return;
-    }
-    setStage("choose-game");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loading, user]);
-
   async function playAttempt(chosenGameType) {
     setGameType(chosenGameType);
     setErrorMsg("");
     try {
-      const accessToken = getAccessToken();
       let data;
       if (!hasEntered) {
         data = await apiFetch("/entries", {
-          accessToken,
           method: "POST",
           body: { gameType: chosenGameType },
         });
         setHasEntered(true);
       } else {
         data = await apiFetch(`/entries/${cycleEntry.id}/retry`, {
-          accessToken,
           method: "POST",
           body: { gameType: chosenGameType },
         });
@@ -82,10 +70,6 @@ export default function PlayPage() {
         setStage("playing"); // mini-game animates, then calls onRevealed below
       }
     } catch (err) {
-      if (err.data?.error === "profile_required") {
-        setStage("needs-profile");
-        return;
-      }
       if (err.data?.error === "already_entered") {
         setCycleEntry(err.data.cycleEntry);
         setHasEntered(true);
@@ -110,35 +94,6 @@ export default function PlayPage() {
     const prizeLabel = prizeLabelFor(result.prizeTierKey);
     return `Hola, gané ${prizeLabel} en LuckyWin Mexica. Mi número de entrada es ${cycleEntry.entryNumber}.`;
   }, [result, cycleEntry, t, cycle]);
-
-  if (loading || stage === "loading") {
-    return (
-      <div className="max-w-md mx-auto px-4 sm:px-6 py-24 text-center">
-        <div className="mx-auto w-12 h-12 rounded-full border-4 border-gold/30 border-t-gold animate-spin" />
-      </div>
-    );
-  }
-
-  if (stage === "needs-profile") {
-    return (
-      <div className="max-w-md mx-auto px-4 sm:px-6 py-16 text-center">
-        <h1 className="text-2xl font-bold mb-3">
-          Completa tu perfil / Complete your profile
-        </h1>
-        <p className="text-neutral-400 mb-6">
-          Necesitamos algunos datos más antes de jugar.
-          <br />
-          We need a few more details before you can play.
-        </p>
-        <Link
-          href="/registro"
-          className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-gold to-goldlight text-black font-bold px-6 py-3"
-        >
-          Continuar / Continue
-        </Link>
-      </div>
-    );
-  }
 
   return (
     <div className="max-w-md mx-auto px-4 sm:px-6 py-16 text-center">
