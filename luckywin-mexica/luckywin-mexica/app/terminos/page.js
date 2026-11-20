@@ -28,9 +28,12 @@ function TermsEs() {
   return (
     <div>
       <p className="text-neutral-400 text-sm mb-8">
-        Última actualización: [FECHA]. Estos Términos y Condiciones rigen la
-        participación en la promoción "LuckyWin Mexica" (la "Promoción"),
-        operada por LuckyWin Mexica ("el Operador").
+        Última actualización: 20 de noviembre de 2026. Estos Términos y
+        Condiciones ("Términos") constituyen un acuerdo legal entre el
+        participante y LuckyWin Mexica ("el Operador") y rigen la
+        participación en la promoción "LuckyWin Mexica" (la "Promoción"). Al
+        registrarte o participar en la Promoción, aceptas quedar vinculado
+        por estos Términos en su totalidad.
       </p>
 
       <Section title="1. Elegibilidad">
@@ -62,20 +65,24 @@ function TermsEs() {
       </Section>
 
       <Section title="4. Premios disponibles por ciclo">
-        <p>El ciclo mensual actual incluye un total de 40 premios:</p>
+        <p>El ciclo mensual actual incluye un total de 38 premios:</p>
         <ul className="list-disc pl-5 space-y-1">
-          <li>5 premios en efectivo de $5,000 USD cada uno</li>
-          <li>5 iPhone 17</li>
+          <li>1 premio en efectivo de $5,000 USD</li>
+          <li>1 premio en efectivo de $10,000 USD</li>
+          <li>1 premio en efectivo de $15,000 USD</li>
+          <li>5 iPhone 17 Pro</li>
           <li>10 PlayStation 5</li>
           <li>10 laptops</li>
           <li>10 tarjetas de regalo Amazon de $1,000 USD cada una</li>
         </ul>
         <p>
           Las probabilidades de ganar dependen del número total de
-          participantes en el ciclo frente a los 40 premios disponibles, y
+          participantes en el ciclo frente a los 38 premios disponibles, y
           disminuyen conforme se agota el inventario de cada categoría de
           premio. El Operador no garantiza que todos los participantes
-          ganarán un premio.
+          ganarán un premio. El inventario de premios restante por
+          categoría se actualiza en tiempo real y puede consultarse en la
+          página principal del sitio.
         </p>
       </Section>
 
@@ -158,9 +165,12 @@ function TermsEn() {
   return (
     <div>
       <p className="text-neutral-400 text-sm mb-8">
-        Last updated: [DATE]. These Terms and Conditions govern
-        participation in the "LuckyWin Mexica" promotion (the
-        "Promotion"), operated by LuckyWin Mexica (the "Operator").
+        Last updated: November 20, 2026. These Terms and Conditions
+        ("Terms") constitute a legal agreement between the entrant and
+        LuckyWin Mexica (the "Operator") and govern participation in the
+        "LuckyWin Mexica" promotion (the "Promotion"). By registering or
+        participating in the Promotion, you agree to be bound by these
+        Terms in full.
       </p>
 
       <Section title="1. Eligibility">
@@ -191,19 +201,23 @@ function TermsEn() {
       </Section>
 
       <Section title="4. Prizes available per cycle">
-        <p>The current monthly cycle includes a total of 40 prizes:</p>
+        <p>The current monthly cycle includes a total of 38 prizes:</p>
         <ul className="list-disc pl-5 space-y-1">
-          <li>5 cash prizes of $5,000 USD each</li>
-          <li>5 iPhone 17 units</li>
+          <li>1 cash prize of $5,000 USD</li>
+          <li>1 cash prize of $10,000 USD</li>
+          <li>1 cash prize of $15,000 USD</li>
+          <li>5 iPhone 17 Pro units</li>
           <li>10 PlayStation 5 units</li>
           <li>10 laptops</li>
           <li>10 Amazon gift cards of $1,000 USD each</li>
         </ul>
         <p>
           Odds of winning depend on the total number of entrants in the
-          cycle relative to the 40 available prizes, and decrease as each
+          cycle relative to the 38 available prizes, and decrease as each
           prize tier's inventory is depleted. The Operator does not
-          guarantee that every entrant will win a prize.
+          guarantee that every entrant will win a prize. Remaining prize
+          inventory by category updates in real time and can be viewed on
+          the site's homepage.
         </p>
       </Section>
 
