@@ -2,17 +2,7 @@
 
 import Image from "next/image";
 import { useLanguage } from "../lib/LanguageContext";
-
-const CASH_TIERS = ["cash5k", "cash10k", "cash15k"];
-const PRIZE_IMAGES = {
-  cash5k: "/prizes/cash.jpg",
-  cash10k: "/prizes/cash.jpg",
-  cash15k: "/prizes/cash.jpg",
-  iphone: "/prizes/iphone.jpg",
-  ps5: "/prizes/ps5.jpg",
-  laptop: "/prizes/laptop.jpg",
-  giftcard: "/prizes/giftcard.jpg",
-};
+import { CASH_TIERS, PRIZE_IMAGES } from "../lib/prizeImages";
 
 // tier is one entry from the live GET /api/cycle/current response:
 // { key, label, totalThisCycle, remainingThisCycle, cashValueUsd, cashValueMxn }
