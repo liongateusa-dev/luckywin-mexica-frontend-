@@ -6,30 +6,40 @@ import { useLanguage } from "../../../lib/LanguageContext";
 import { apiFetch } from "../../../lib/api";
 import { getWhatsAppLink } from "../../../lib/config";
 import ScratchCard from "../../../components/ScratchCard";
-import Confetti from "../../../components/Confetti";
+import LuckyDrawBoxes from "../../../components/LuckyDrawBoxes";
+import Fireworks from "../../../components/Fireworks";
 
 // Reveal page for an admin-issued AwardedLink (see awardedLinkService.js
 // on the backend). This is for REAL winners of a qualifying round run
 // outside this website. Per spec, every link always awards exactly 3
-// prizes together (1 random cash tier + laptop + iPhone 17 Pro) —
-// nothing is created or revealed until the real recipient types their
-// own name below. No login/signup required.
+// prizes together (always includes Cash $15,000 USD, plus 2 more from
+// the admin-chosen rotation) — nothing is created or revealed until
+// the real recipient actually plays.
 //
-// Flow: check token -> ask for name -> claim (creates 3 real Winner
-// rows server-side) -> congratulate by name -> single scratch card
-// reveals all 3 prizes together -> Accept -> guided to WhatsApp.
+// Flow (per product spec):
+//   1. check token
+//   2. show the 6-box "lucky draw" grid -> player taps exactly ONE box
+//      (purely a presentation layer; every box secretly leads to the
+//      same server-decided 3 prizes, same pattern as the on-site mini-
+//      games described in drawService.js)
+//   3. ask for their name
+//   4. claim (creates 3 real Winner rows server-side) -> scratch card
+//      appears immediately, revealing all 3 prizes together
+//   5. once fully scratched -> ONE celebration (fireworks + gold
+//      shimmer) fires
+//   6. Claim my prize button -> Accept -> guided to WhatsApp
 export default function AwardedLinkPage() {
   const { t } = useLanguage();
   const { token } = useParams();
 
-  // checking | invalid | enter-name | scratch | accept-pending | accepted
+  // checking | invalid | box | enter-name | scratch | accept-pending | accepted
   const [stage, setStage] = useState("checking");
   const [invalidReason, setInvalidReason] = useState("");
   const [fullName, setFullName] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [claim, setClaim] = useState(null); // { fullName, claimDeadline, prizes: [{winnerId, prizeTierKey, prizeTierLabel}, ...] }
-  const [confettiBurst, setConfettiBurst] = useState(0); // bump this number to fire a new confetti burst
+  const [fireworksBurst, setFireworksBurst] = useState(0); // bump to fire fireworks
 
   useEffect(() => {
     if (!token) return;
@@ -41,8 +51,7 @@ export default function AwardedLinkPage() {
     try {
       const data = await apiFetch(`/awarded/${token}`);
       if (data.valid) {
-        setStage("enter-name");
-        setConfettiBurst((n) => n + 1);
+        setStage("box");
       } else {
         setInvalidReason(data.reason || "not_found");
         setStage("invalid");
@@ -51,6 +60,13 @@ export default function AwardedLinkPage() {
       setInvalidReason("not_found");
       setStage("invalid");
     }
+  }
+
+  // Box tap is purely cosmetic (see component notes) — it just moves
+  // the player on to entering their name. The real prizes are decided
+  // server-side in submitName below, exactly as before.
+  function handleBoxPick() {
+    setStage("enter-name");
   }
 
   async function submitName(e) {
@@ -130,7 +146,9 @@ export default function AwardedLinkPage() {
 
   return (
     <div className="max-w-md mx-auto px-4 sm:px-6 py-16">
-      {confettiBurst > 0 && <Confetti trigger={confettiBurst} />}
+      {fireworksBurst > 0 && <Fireworks trigger={fireworksBurst} />}
+
+      {stage === "box" && <LuckyDrawBoxes onPick={handleBoxPick} />}
 
       {stage === "enter-name" && (
         <div className="text-center space-y-6">
@@ -167,7 +185,7 @@ export default function AwardedLinkPage() {
             prizeLabels={claim.prizes.map((p) => p.prizeTierLabel)}
             onFullyRevealed={() => {
               setStage("accept-pending");
-              setConfettiBurst((n) => n + 1);
+              setFireworksBurst((n) => n + 1);
             }}
           />
         </div>
