@@ -5,22 +5,16 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { useLanguage } from "../lib/LanguageContext";
-import { useAuth } from "../lib/AuthContext";
 
+// Play is fully anonymous (no accounts at all — see jugar/page.js), so
+// this header no longer shows Winners, Login, or Register at all.
 export default function Header() {
   const { t, lang, setLang } = useLanguage();
-  const { user, signOut } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const isHome = pathname === "/";
-
-  async function handleLogout() {
-    setMenuOpen(false);
-    await signOut();
-    router.push("/");
-  }
 
   function closeMenu() {
     setMenuOpen(false);
@@ -29,7 +23,6 @@ export default function Header() {
   const navLinks = [
     { href: "/", label: t("nav.home") },
     { href: "/jugar", label: t("nav.play") },
-    { href: "/ganadores", label: t("nav.winners") },
     { href: "/terminos", label: t("nav.terms") },
     { href: "/privacidad", label: t("nav.privacy") },
   ];
@@ -99,22 +92,6 @@ export default function Header() {
             </button>
           </div>
 
-          {user ? (
-            <button
-              onClick={handleLogout}
-              className="hidden sm:inline-flex items-center rounded-full border border-white/20 hover:border-white/40 transition px-4 py-2 text-sm font-semibold text-neutral-200"
-            >
-              {t("nav.logout")}
-            </button>
-          ) : (
-            <Link
-              href="/registro"
-              className="hidden sm:inline-flex items-center rounded-full bg-mxgreen hover:bg-mxgreen/90 transition px-4 py-2 text-sm font-semibold"
-            >
-              {t("nav.register")}
-            </Link>
-          )}
-
           <button
             onClick={() => setMenuOpen((open) => !open)}
             aria-label={t("nav.menu")}
@@ -165,34 +142,6 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
-
-            <div className="h-px bg-white/10 my-2" />
-
-            {user ? (
-              <button
-                onClick={handleLogout}
-                className="py-2.5 px-2 rounded-lg text-left hover:bg-white/5 hover:text-white transition"
-              >
-                {t("nav.logout")}
-              </button>
-            ) : (
-              <>
-                <Link
-                  href="/iniciar-sesion"
-                  onClick={closeMenu}
-                  className="py-2.5 px-2 rounded-lg hover:bg-white/5 hover:text-white transition"
-                >
-                  {t("nav.login")}
-                </Link>
-                <Link
-                  href="/registro"
-                  onClick={closeMenu}
-                  className="mt-1 inline-flex items-center justify-center rounded-full bg-mxgreen hover:bg-mxgreen/90 transition px-4 py-2.5 text-sm font-semibold"
-                >
-                  {t("nav.register")}
-                </Link>
-              </>
-            )}
           </nav>
         </div>
       )}
