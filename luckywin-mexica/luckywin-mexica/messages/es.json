@@ -5,7 +5,11 @@
     "winners": "Ganadores",
     "terms": "Términos",
     "privacy": "Privacidad",
-    "register": "Registrarse"
+    "register": "Registrarse",
+    "back": "Atrás",
+    "menu": "Menú",
+    "login": "Iniciar sesión",
+    "logout": "Cerrar sesión"
   },
   "hero": {
     "title": "LuckyWin Mexica",
