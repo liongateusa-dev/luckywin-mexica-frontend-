@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Image from "next/image";
 import { useLanguage } from "../lib/LanguageContext";
 
 // A 6-box "lucky draw" grid shown BEFORE the prize is actually claimed
@@ -12,11 +13,18 @@ import { useLanguage } from "../lib/LanguageContext";
 // prize logic lives in this component; it only lets the box art vary
 // cosmetically per box so the grid doesn't look like 6 identical tiles.
 //
-// boxArt: an array of up to 6 decorative image paths (e.g. a mix of
-// gift-box icons / blurred prize glimpses). Purely cosmetic — every
-// box secretly leads to the same server-decided prize set.
+// Box art: 6 branded gift-box renders in /public/boxes (gold, blue,
+// red, purple, green, black) — purely cosmetic, every box secretly
+// leads to the same server-decided prize set.
 const BOX_COUNT = 6;
-const BOX_EMOJIS = ["🎁", "🎉", "💰", "🏆", "⭐", "🎊"];
+const BOX_IMAGES = [
+  "/boxes/gold.png",
+  "/boxes/blue.png",
+  "/boxes/red.png",
+  "/boxes/purple.png",
+  "/boxes/green.png",
+  "/boxes/black.png",
+];
 
 export default function LuckyDrawBoxes({ onPick, disabled }) {
   const { t } = useLanguage();
@@ -49,18 +57,24 @@ export default function LuckyDrawBoxes({ onPick, disabled }) {
               disabled={disabled || pickedIndex !== null}
               aria-label={`Box ${index + 1}`}
               className={`
-                relative aspect-square rounded-2xl border-2 flex items-center justify-center text-4xl
-                transition-all duration-300 select-none
+                relative aspect-square rounded-2xl border-2 flex items-center justify-center p-2
+                transition-all duration-300 select-none bg-neutral-950
                 ${
                   isPicked
-                    ? "border-gold bg-gradient-to-br from-gold/30 to-goldlight/10 scale-110 shadow-[0_0_25px_rgba(255,215,0,0.5)]"
+                    ? "border-gold scale-110 shadow-[0_0_25px_rgba(255,215,0,0.5)]"
                     : isLockedOut
-                    ? "border-white/5 bg-neutral-900/40 opacity-30 grayscale cursor-not-allowed"
-                    : "border-gold/40 bg-neutral-900/70 hover:border-gold hover:scale-105 active:scale-95 cursor-pointer"
+                    ? "border-white/5 opacity-30 grayscale cursor-not-allowed"
+                    : "border-gold/40 hover:border-gold hover:scale-105 active:scale-95 cursor-pointer"
                 }
               `}
             >
-              <span className={isPicked ? "animate-bounce" : ""}>{BOX_EMOJIS[index]}</span>
+              <Image
+                src={BOX_IMAGES[index]}
+                alt={`Box ${index + 1}`}
+                fill
+                sizes="(max-width: 384px) 33vw, 128px"
+                className={`object-contain p-2 ${isPicked ? "animate-bounce" : ""}`}
+              />
               {isPicked && (
                 <span className="absolute inset-0 rounded-2xl border-2 border-gold animate-ping" />
               )}
