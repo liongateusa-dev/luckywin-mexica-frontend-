@@ -15,9 +15,9 @@ export default function Footer() {
           <Image
             src="/logo.png"
             alt="LuckyWin Mexica"
-            width={160}
-            height={64}
-            className="h-8 w-auto"
+            width={320}
+            height={128}
+            className="h-14 sm:h-16 w-auto"
           />
           <div className="flex gap-5 text-sm text-neutral-400">
             <Link href="/terminos" className="hover:text-white transition">
