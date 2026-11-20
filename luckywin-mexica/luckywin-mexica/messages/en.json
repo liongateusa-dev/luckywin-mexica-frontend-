@@ -44,6 +44,12 @@
     "giftcard": "Amazon Gift Card",
     "giftcardDesc": "$1,000 USD each",
     "giftcardWinners": "10 winners",
+    "samsung_tv": "85\" Samsung UHD Smart TV",
+    "samsung_tvWinners": "5 winners",
+    "luxury_villa": "Dream House (Luxury Villa)",
+    "luxury_villaWinners": "1 winner",
+    "mg_suv": "Brand New SUV (MG)",
+    "mg_suvWinners": "2 winners",
     "disclaimer": "Prize availability updates in real time and reflects what remains in the current monthly cycle. No purchase is necessary to enter or win.",
     "oneWinner": "1 winner",
     "winnersCount": "{count} winners"
@@ -143,6 +149,9 @@
   "awarded": {
     "heading": "You've been selected! 🎉",
     "subheading": "Enter your name to reveal your prize.",
+    "boxHeading": "Pick your lucky box!",
+    "boxSubheading": "Tap one box — only one try, choose wisely.",
+    "boxPicked": "Nice pick! Now let's get your name.",
     "namePlaceholder": "Your full name",
     "revealButton": "Reveal my prize",
     "submitting": "Please wait...",

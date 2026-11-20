@@ -44,6 +44,12 @@
     "giftcard": "Tarjeta de regalo Amazon",
     "giftcardDesc": "$1,000 USD c/u",
     "giftcardWinners": "10 ganadores",
+    "samsung_tv": "Smart TV Samsung UHD de 85\"",
+    "samsung_tvWinners": "5 ganadores",
+    "luxury_villa": "Casa de Ensueño (Villa de Lujo)",
+    "luxury_villaWinners": "1 ganador",
+    "mg_suv": "SUV Nueva (MG)",
+    "mg_suvWinners": "2 ganadores",
     "disclaimer": "La disponibilidad de premios se actualiza en tiempo real y refleja lo que queda en el ciclo mensual actual. No se requiere compra para participar ni para ganar.",
     "oneWinner": "1 ganador",
     "winnersCount": "{count} ganadores"
@@ -143,6 +149,9 @@
   "awarded": {
     "heading": "¡Has sido seleccionado! 🎉",
     "subheading": "Ingresa tu nombre para revelar tu premio.",
+    "boxHeading": "¡Elige tu caja de la suerte!",
+    "boxSubheading": "Toca una caja — solo un intento, elige con cuidado.",
+    "boxPicked": "¡Buena elección! Ahora vamos con tu nombre.",
     "namePlaceholder": "Tu nombre completo",
     "revealButton": "Revelar mi premio",
     "submitting": "Espera por favor...",
